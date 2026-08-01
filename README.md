@@ -1,9 +1,9 @@
 # Hello widget
 
 The smallest widget for the [illogical-impulse extensions
-fork](https://github.com/Berupor/dots-hyprland) that is still a real one: a bar
-indicator with an option, a sibling type and its own singleton. Copy this repo to
-start your own.
+fork](https://github.com/Berupor/dots-hyprland-extensions) that is still a real
+one: a bar indicator with an option, a sibling type and its own singleton. Copy
+this repo to start your own.
 
 | In the bar | Both states |
 |---|---|

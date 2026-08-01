@@ -14,7 +14,7 @@ jobs:
       # The contract this widget is built against, for the lint that goes with it
       - uses: actions/checkout@v4
         with:
-          repository: Berupor/dots-hyprland
+          repository: Berupor/dots-hyprland-extensions
           ref: extensions
           path: shell
       - run: shell/tests/design-lint.sh widget
