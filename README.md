@@ -5,9 +5,9 @@ fork](https://github.com/Berupor/dots-hyprland-extensions) that is still a real
 one: a bar indicator with an option, a sibling type and its own singleton. Copy
 this repo to start your own.
 
-| In the bar | Both states |
-|---|---|
-| ![Bar indicator](docs/bar.png) | ![States](docs/states.png) |
+| In the bar | In the vertical bar | Every state |
+|---|---|---|
+| ![Bar indicator](docs/bar.png) | ![Vertical bar](docs/vertical.png) | ![States](docs/states.png) |
 
 ## What a widget is
 
@@ -30,6 +30,11 @@ start, so no file of the shell needs editing.
   `barUtilButton`, `sidebarLeftTab`, `sidebarRightTab`, `backgroundWidget`,
   `regionAction`, and `catalogView` / `settingsView` for taking a settings screen
   over. Paths are relative to the widget directory.
+- **Orientations** are what a bar slot draws for: `{"path": ..., "orientations":
+  ["horizontal", "vertical"]}`, and the vertical bar hands the file
+  `vertical: true`. One file covers both - `GridLayout { columns: vertical ? 1 :
+  -1 }`, sized off `verticalBarWidth` instead of `barHeight`. List only the one
+  you drew for and the other bar simply skips you; a bare path means horizontal.
 - **Options** are a schema in the manifest, with defaults. The settings page
   draws them for you; read them back with `WidgetCatalog.option(id, key)`. A
   `settingsPage` is only needed when the generated form is not enough.
@@ -56,6 +61,9 @@ tests/widget-probe.sh hello barIndicator -x ~/.config/illogical-impulse/widgets/
 tests/qml-cases.sh    -x ~/.config/illogical-impulse/widgets/hello
 tests/widget-shots.sh -x ~/.config/illogical-impulse/widgets/hello
 ```
+
+The vertical bar is the same probe with the property set and its own host:
+`-p vertical=true -H vbar -g 46x110`.
 
 `git config core.hooksPath .githooks` runs the cases and redraws the shots on
 push, so the README never shows a widget you no longer have.

@@ -7,12 +7,13 @@ WidgetManifest {
     name: Translation.tr("Hello")
     description: Translation.tr("Template widget: copy this repo to start your own")
     icon: "waving_hand"
-    version: "1.0"
+    version: "1.1"
     author: "Berupor"
-    minShellVersion: "1.0"
+    minShellVersion: "1.2" // Orientations on a bar slot, so not below 1.2
     // dependencies: ["some-cli"] // Greyed out in the catalog until they are all there
     slots: ({
-        "barIndicator": "HelloIndicator.qml"
+        // Drop an orientation and the widget stays out of that bar; a bare path means horizontal
+        "barIndicator": { "path": "HelloIndicator.qml", "orientations": ["horizontal", "vertical"] }
     })
     options: [
         {

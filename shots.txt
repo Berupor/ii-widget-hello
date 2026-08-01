@@ -2,4 +2,5 @@
 #   tests/widget-shots.sh -x ~/.config/illogical-impulse/widgets/hello
 # A slot is shot in its host, a scene is shot as it comes.
 barIndicator -n bar -g 150x44
--f demo/DemoHello.qml -n states -g 200x88
+barIndicator -n vertical -p vertical=true -H vbar -g 46x110
+-f demo/DemoHello.qml -n states -g 244x88
