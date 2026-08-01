@@ -2,12 +2,13 @@
 
 The smallest widget for the [illogical-impulse extensions
 fork](https://github.com/Berupor/dots-hyprland-extensions) that is still a real
-one: a bar indicator with an option, a sibling type and its own singleton. Copy
-this repo to start your own.
+one: an indicator that draws in both bars, a popup on hover, an option apiece for
+the looks and the polling, a sibling type and a singleton that runs `uptime` for
+the line the popup shows. Copy this repo to start your own.
 
-| In the bar | In the vertical bar | Every state |
-|---|---|---|
-| ![Bar indicator](docs/bar.png) | ![Vertical bar](docs/vertical.png) | ![States](docs/states.png) |
+| In the bar | In the vertical bar | Every state | The popup |
+|---|---|---|---|
+| ![Bar indicator](docs/bar.png) | ![Vertical bar](docs/vertical.png) | ![States](docs/states.png) | ![Popup](docs/popup.png) |
 
 ## What a widget is
 
@@ -20,6 +21,7 @@ start, so no file of the shell needs editing.
 | `Manifest.qml` | id, name, icon, versions, slots, options |
 | `HelloIndicator.qml` | the view a slot points at |
 | `HelloBadge.qml` | a sibling type, resolves with no import at all |
+| `HelloPopup.qml` + `HelloDetails.qml` | the popup: frame and body, split because a window cannot be grabbed |
 | `HelloState.qml` + `qmldir` | a singleton, which needs its `qmldir` line or its properties silently read as empty |
 | `demo/` | scenes: the tests and the pictures, never loaded by the shell |
 | `shots.txt` | what `widget-shots.sh` photographs for the README |
@@ -39,7 +41,11 @@ start, so no file of the shell needs editing.
   draws them for you; read them back with `WidgetCatalog.option(id, key)`. A
   `settingsPage` is only needed when the generated form is not enough.
 - **Dependencies** are binaries in `dependencies`. A widget missing one says so
-  in the catalog instead of turning into a dead button.
+  in the catalog instead of turning into a dead button. Whatever cannot be QML is
+  a `Process` of your own plus that line - never something the catalog installs.
+- **Popups** hang off the indicator as `StyledPopup`, a lazy window that lives
+  while the bar item is hovered, so the indicator is a `MouseArea`. Keep the body
+  in a file of its own: the probe can photograph an `Item`, not a window.
 - **Versions**: bump `version` on every release, and keep `minShellVersion` at
   the contract you built against. The shell refuses a widget from the future.
 - **Design system only**: `Appearance.*` for colors and fonts, `MaterialSymbol`,

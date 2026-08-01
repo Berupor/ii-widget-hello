@@ -4,8 +4,8 @@ import qs.modules.widgets
 import QtQuick
 import QtQuick.Layouts
 
-/** Bar indicator: both orientations, design system, sibling type, own singleton, one option. */
-Item {
+/** Bar indicator: both orientations, a popup on hover, sibling type, own singleton. */
+MouseArea {
     id: root
 
     // Options default from the catalog but stay writable, so a demo scene can
@@ -18,6 +18,8 @@ Item {
 
     implicitWidth: root.vertical ? root.barThickness : layout.implicitWidth
     implicitHeight: root.vertical ? layout.implicitHeight : root.barThickness
+    // The popup follows the hover, and the bar has a setting for opening those by click
+    hoverEnabled: !Config.options.bar.tooltips.clickToShow
 
     GridLayout {
         id: layout
@@ -47,5 +49,9 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             visible: root.badge
         }
+    }
+
+    HelloPopup {
+        hoverTarget: root
     }
 }

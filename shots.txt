@@ -4,3 +4,4 @@
 barIndicator -n bar -g 150x44
 barIndicator -n vertical -p vertical=true -H vbar -g 46x110
 -f demo/DemoHello.qml -n states -g 244x88
+-f demo/DemoPopup.qml -n popup -g 200x62 -H sidebar
