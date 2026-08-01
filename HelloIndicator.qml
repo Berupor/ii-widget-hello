@@ -4,13 +4,13 @@ import qs.modules.widgets
 import QtQuick
 import QtQuick.Layouts
 
-/** Bar indicator: both orientations, a popup on hover, sibling type, own singleton. */
+/** Bar indicator: both orientations, a popup on hover, own singleton, two options. */
 MouseArea {
     id: root
 
     // Options default from the catalog but stay writable, so a demo scene can
     // draw every state without touching the store
-    property bool badge: WidgetCatalog.option("hello", "badge") ?? false
+    property bool showGreeting: WidgetCatalog.option("hello", "showGreeting") ?? false
     // Set by the vertical bar on load, so one file covers both orientations
     property bool vertical: false
     readonly property string greeting: HelloState.greeting
@@ -39,15 +39,11 @@ MouseArea {
             Layout.alignment: Qt.AlignHCenter
             // 46px of bar leaves no room for a word, so it elides and drops a step
             Layout.maximumWidth: root.vertical ? root.barThickness - 8 : -1
+            visible: root.showGreeting
             elide: Text.ElideRight
             text: root.greeting
             font.pixelSize: root.vertical ? Appearance.font.pixelSize.smaller : Appearance.font.pixelSize.normal
             color: Appearance.colors.colOnLayer1
-        }
-
-        HelloBadge {
-            Layout.alignment: Qt.AlignHCenter
-            visible: root.badge
         }
     }
 

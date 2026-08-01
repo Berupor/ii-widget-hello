@@ -1,4 +1,4 @@
-//@ probe hello -g 260x140
+//@ probe hello -g 165x82
 import ".." // The widget's own types and its HelloState singleton, via its qmldir
 import QtQuick.Layouts
 
@@ -14,20 +14,28 @@ RowLayout {
         spacing: 0
 
         HelloIndicator {
-            id: plain
-            badge: false
+            id: greeted
+            showGreeting: true
         }
 
         HelloIndicator {
-            id: badged
-            badge: true
+            id: quiet
+            showGreeting: false
         }
     }
 
     // What the vertical bar loads: the same file, with `vertical` set on it
     HelloIndicator {
         id: upright
-        badge: true
+        showGreeting: true
+        vertical: true
+    }
+
+    // Not in the picture, only in the check below
+    HelloIndicator {
+        id: uprightQuiet
+        visible: false
+        showGreeting: false
         vertical: true
     }
 
@@ -35,22 +43,23 @@ RowLayout {
         return [
             {
                 "name": "the singleton resolves through qmldir",
-                "got": plain.greeting,
+                "got": greeted.greeting,
                 "want": "Hello"
             },
             {
-                "name": "the badge takes room in the bar",
-                "got": badged.implicitWidth > plain.implicitWidth,
+                "name": "the greeting takes room in the bar",
+                "got": greeted.implicitWidth > quiet.implicitWidth,
                 "want": true
             },
             {
-                "name": "the vertical one stacks instead of stretching",
-                "got": upright.implicitHeight > upright.implicitWidth,
+                // Horizontally the greeting buys width, vertically it buys height
+                "name": "the vertical one stacks the greeting under the icon",
+                "got": upright.implicitHeight > uprightQuiet.implicitHeight,
                 "want": true
             },
             {
                 "name": "the vertical one keeps to the bar width",
-                "got": upright.implicitWidth < badged.implicitWidth,
+                "got": upright.implicitWidth < greeted.implicitWidth,
                 "want": true
             }
         ];

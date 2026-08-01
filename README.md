@@ -3,8 +3,8 @@
 The smallest widget for the [illogical-impulse extensions
 fork](https://github.com/Berupor/dots-hyprland-extensions) that is still a real
 one: an indicator that draws in both bars, a popup on hover, an option apiece for
-the looks and the polling, a sibling type and a singleton that runs `uptime` for
-the line the popup shows. Copy this repo to start your own.
+the looks and the polling, and a singleton that runs `uptime` for the line the
+popup shows. Copy this repo to start your own.
 
 | In the bar | In the vertical bar | Every state | The popup |
 |---|---|---|---|
@@ -20,8 +20,7 @@ start, so no file of the shell needs editing.
 |---|---|
 | `Manifest.qml` | id, name, icon, versions, slots, options |
 | `HelloIndicator.qml` | the view a slot points at |
-| `HelloBadge.qml` | a sibling type, resolves with no import at all |
-| `HelloPopup.qml` + `HelloDetails.qml` | the popup: frame and body, split because a window cannot be grabbed |
+| `HelloPopup.qml` + `HelloDetails.qml` | the popup: frame and body, split because a window cannot be grabbed. Sibling types, so the indicator reaches them with no import at all |
 | `HelloState.qml` + `qmldir` | a singleton, which needs its `qmldir` line or its properties silently read as empty |
 | `demo/` | scenes: the tests and the pictures, never loaded by the shell |
 | `shots.txt` | what `widget-shots.sh` photographs for the README |
@@ -69,7 +68,7 @@ tests/widget-shots.sh -x ~/.config/illogical-impulse/widgets/hello
 ```
 
 The vertical bar is the same probe with the property set and its own host:
-`-p vertical=true -H vbar -g 46x110`.
+`-p vertical=true -H vbar -g 46x38`.
 
 `git config core.hooksPath .githooks` runs the cases and redraws the shots on
 push, so the README never shows a widget you no longer have.

@@ -7,7 +7,7 @@ WidgetManifest {
     name: Translation.tr("Hello")
     description: Translation.tr("Template widget: copy this repo to start your own")
     icon: "waving_hand"
-    version: "1.2"
+    version: "1.3"
     author: "Berupor"
     minShellVersion: "1.2" // Orientations on a bar slot, so not below 1.2
     dependencies: ["uptime"] // Greyed out in the catalog until they are all there
@@ -17,10 +17,10 @@ WidgetManifest {
     })
     options: [
         {
-            "key": "badge",
+            "key": "showGreeting",
             "type": "switch",
-            "icon": "counter_1",
-            "label": Translation.tr("Show the badge"),
+            "icon": "waving_hand",
+            "label": Translation.tr("Greet from the bar, not just the popup"),
             "default": true
         },
         {
