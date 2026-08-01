@@ -1,0 +1,5 @@
+# README shots, rendered by the extensions fork:
+#   tests/widget-shots.sh -x ~/.config/illogical-impulse/widgets/hello
+# A slot is shot in its host, a scene is shot as it comes.
+barIndicator -n bar -g 150x44
+-f demo/DemoHello.qml -n states -g 200x88

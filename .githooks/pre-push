@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Scenes and shots, against the shell this widget plugs into. Pictures that drift
+# from the code are worse than none, so a stale docs/ blocks the push.
+#   git config core.hooksPath .githooks
+set -u
+
+SHELL_REPO="${II_SHELL_REPO:-$HOME/Projects/dots-hyprland}"
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+[ -x "$SHELL_REPO/tests/qml-cases.sh" ] || { echo "no shell checkout at $SHELL_REPO, set II_SHELL_REPO"; exit 0; }
+
+FAIL=0
+"$SHELL_REPO/tests/design-lint.sh" "$DIR" || FAIL=1
+"$SHELL_REPO/tests/qml-cases.sh" -x "$DIR" || FAIL=1
+if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+    "$SHELL_REPO/tests/widget-shots.sh" -x "$DIR" > /dev/null || FAIL=1
+    git -C "$DIR" diff --quiet -- docs || { echo "docs/ is out of date, the shots just redrew it - commit them"; FAIL=1; }
+fi
+
+[ "$FAIL" = 0 ] || echo "pre-push failed, push anyway with --no-verify"
+exit "$FAIL"

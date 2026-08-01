@@ -1,0 +1,20 @@
+name: lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: widget
+      # The contract this widget is built against, for the lint that goes with it
+      - uses: actions/checkout@v4
+        with:
+          repository: Berupor/dots-hyprland
+          ref: extensions
+          path: shell
+      - run: shell/tests/design-lint.sh widget
